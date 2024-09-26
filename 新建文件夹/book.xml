@@ -1,0 +1,17 @@
+<catalogue>
+    <book id="1">
+        <title>Book Title 1</title>
+        <author>Author 1</author>
+        <price>10.99</price>
+    </book>
+    <book id="2">
+        <title>Book Title 2</title>
+        <author>Author 2</author>
+        <price>15.99</price>
+    </book>
+    <book id="3">
+        <title>Book Title 3</title>
+        <author>Author 3</author>
+        <price>20.99</price>
+    </book>
+</catalogue>

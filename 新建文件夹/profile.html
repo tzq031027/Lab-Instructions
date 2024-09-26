@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+</head>
+<body>
+    <h1>User Profiles</h1>
+    <ul id="user-list"></ul>
+    <script>
+        // 使用 fetch API 获取 JSON 数据
+        fetch('userProfiles.json')
+            .then(response => response.json())
+            .then(users => {
+                const userList = document.getElementById('user-list');
+                
+                // 遍历每个用户并添加到 HTML 列表中
+                users.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `Name: ${user.firstName} ${user.lastName}, Email: ${user.email}, Birthdate: ${user.dateOfBirth}, Subscribed: ${user.subscription}`;
+                    userList.appendChild(li);
+                });
+            })
+            .catch(err => console.error('Error fetching JSON:', err));
+    </script>
+</body>
+</html>

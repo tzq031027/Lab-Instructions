@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalogue</title>
+</head>
+<body>
+    <h1>Book Catalogue</h1>
+    <ul id="book-list"></ul>
+    <script>
+        // 使用 fetch API 获取 XML 数据
+        fetch('book.xml')  // 确保 book.xml 在同一目录下
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(xmlText => {
+                // 使用 DOMParser 解析 XML 文本
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+
+                // 获取所有 <book> 元素
+                const books = xmlDoc.getElementsByTagName('book');
+                
+                // 找到 HTML 中的书籍列表元素
+                const bookList = document.getElementById('book-list');
+
+                // 遍历每本书并添加到 HTML 列表中
+                for (let i = 0; i < books.length; i++) {
+                    const title = books[i].getElementsByTagName('title')[0].textContent;
+                    const author = books[i].getElementsByTagName('author')[0].textContent;
+                    const price = books[i].getElementsByTagName('price')[0].textContent;
+
+                    // 创建一个列表项并填入书籍信息
+                    const li = document.createElement('li');
+                    li.textContent = `Title: ${title}, Author: ${author}, Price: $${price}`;
+                    bookList.appendChild(li);
+                }
+            })
+            .catch(err => console.error('Error fetching XML:', err));
+    </script>
+</body>
+</html>
